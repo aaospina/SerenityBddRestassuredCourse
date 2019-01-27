@@ -48,6 +48,20 @@ public class StudentSerenitySteps {
                 .path(p1+firstName+p2);
     }
 
+    @Step("Getting the student information with EmailId: {0}")
+    public HashMap<String, Object> getStudentInfoByEmailId(String email){
+
+        String p1 = "findAll{it.email=='";
+        String p2 =  "'}.get(0)";
+
+        return SerenityRest.rest().given()
+                .when()
+                .get("/list")
+                .then()
+                .extract()
+                .path(p1+email+p2);
+    }
+
     @Step("Updating student information with studentId: {0}, firstName:{1}, lastName:{2}, email:{3}, programme:{4}, courses:{5}")
     public ValidatableResponse updateStudent(int studentId,  String firstName, String lastName, String email, String programme, List<String> courses){
 
